@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Person List</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        table { width: 60%; border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        a { text-decoration: none; color: #007bff; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Persons</h1>
+    <a href="{% url 'create_person' %}">➕ Add New Person</a><br><br>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Qualified</th>
+            <th>Actions</th>
+        </tr>
+        {% for person in persons %}
+        <tr>
+            <td>{{ person.name }}</td>
+            <td>{{ person.age }}</td>
+            <td>{{ person.qualified }}</td>
+            <td>
+                <a href="{% url 'update_person' person.id %}">Edit</a> |
+                <a href="{% url 'delete_person' person.id %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">No records found.</td></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
